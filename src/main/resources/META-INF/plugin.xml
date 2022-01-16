@@ -13,7 +13,7 @@
     </extensions>
 
     <actions>
-        <action class="fr.o80.version.ShowVersionsScreenAction" id="Bump Versions">
+        <action class="fr.o80.version.action.ShowVersionsScreenAction" id="Bump Versions">
             <add-to-group group-id="ViewMenu" anchor="after" relative-to-action="ViewAppearanceGroup"/>
             <keyboard-shortcut first-keystroke="ctrl alt shift X" keymap="$default"/>
         </action>

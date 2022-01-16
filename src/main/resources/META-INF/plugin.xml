@@ -1,0 +1,21 @@
+<idea-plugin>
+    <id>fr.o80.intellij-bump-version</id>
+    <name>Bump Versions</name>>
+    <vendor email="operez@olivierperez.fr" url="https://github.com/olivierperez">Olivier Perez</vendor>
+
+    <description><![CDATA[
+    Having multi versions spread around a project files? Let see them in one place.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <action class="fr.o80.version.ShowVersionsScreenAction" id="Bump Versions">
+            <add-to-group group-id="ViewMenu" anchor="after" relative-to-action="ViewAppearanceGroup"/>
+            <keyboard-shortcut first-keystroke="ctrl alt shift X" keymap="$default"/>
+        </action>
+    </actions>
+</idea-plugin>

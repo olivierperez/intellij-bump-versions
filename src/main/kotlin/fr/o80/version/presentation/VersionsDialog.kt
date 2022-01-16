@@ -11,7 +11,7 @@ import javax.swing.JComponent
 
 class VersionsDialog(
     title: String,
-    project: Project?,
+    private val project: Project,
     basePath: String,
     versionFiles: List<String>
 ) : DialogWrapper(project) {
@@ -56,6 +56,6 @@ class VersionsDialog(
 
     override fun doOKAction() {
         super.doOKAction()
-        applyVersions(versions)
+        applyVersions(project, versions)
     }
 }

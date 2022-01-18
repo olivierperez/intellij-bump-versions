@@ -10,6 +10,11 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <projectConfigurable id="fr.o80.version.presentation.VersionsConfigurable"
+                             instance="fr.o80.version.presentation.VersionsConfigurable"
+                             displayName="Version Bumps Settings"
+                             parentId="tools"
+                             nonDefaultProject="true"/>
     </extensions>
 
     <actions>

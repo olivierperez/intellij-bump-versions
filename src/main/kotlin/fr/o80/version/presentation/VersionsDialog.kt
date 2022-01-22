@@ -20,9 +20,9 @@ class VersionsDialog(
 
     private val versions: List<VersionFile> =
         listVersionFiles()
-            .filter { it.isFile }
-            .mapNotNull { file ->
-                readVersion(file.name, file)
+            .filter { it.second.isFile }
+            .mapNotNull { (filename, file) ->
+                readVersion(filename, file)
             }
 
     init {

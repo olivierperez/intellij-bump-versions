@@ -6,7 +6,7 @@ import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
-import fr.o80.version.model.VersionFile
+import fr.o80.version.domain.model.VersionFile
 
 class ApplyVersions {
     operator fun invoke(project: Project, versions: List<VersionFile>) {

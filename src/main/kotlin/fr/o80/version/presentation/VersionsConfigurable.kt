@@ -3,12 +3,15 @@ package fr.o80.version.presentation
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.project.Project
 import com.intellij.ui.ToolbarDecorator
+import com.intellij.ui.components.JBTextField
+import com.intellij.ui.layout.CellBuilder
 import com.intellij.ui.layout.GrowPolicy
 import com.intellij.ui.layout.panel
 import com.intellij.ui.table.TableView
 import fr.o80.version.domain.GetSettings
 import fr.o80.version.domain.SaveSettings
-import fr.o80.version.model.VersionSettings
+import fr.o80.version.domain.model.VersionSettings
+import java.util.concurrent.CopyOnWriteArrayList
 import javax.swing.JComponent
 
 class VersionsConfigurable(
@@ -18,19 +21,19 @@ class VersionsConfigurable(
     private val getSettings = GetSettings(project)
     private val saveSettings = SaveSettings(project)
 
-    private val initialSettings = getSettings()
-    // TODO OPZ C'est pas beau cette copie de VersionSettings
-    private val settings = VersionSettings(initialSettings.basePath, ArrayList(initialSettings.versionFilePaths))
+    private var initialSettings = getSettings()
+    private val settings = VersionSettings(initialSettings.basePath, CopyOnWriteArrayList(initialSettings.versionFilePaths))
 
+    private lateinit var basePathField: CellBuilder<JBTextField>
     private val tableModel = VersionFilesTableModel(settings.versionFilePaths)
 
     override fun createComponent(): JComponent {
         return panel {
             row {
                 label("Base path (${project.basePath}/...)")
-                textField(
+                basePathField = textField(
                     getter = { settings.basePath },
-                    setter = { settings.basePath = it }
+                    setter = { settings.basePath = it },
                 ).focused()
             }
 
@@ -55,11 +58,15 @@ class VersionsConfigurable(
     }
 
     override fun isModified(): Boolean {
+        settings.basePath = basePathField.component.text
         return initialSettings != settings
     }
 
     override fun apply() {
+        settings.basePath = basePathField.component.text
+
         saveSettings(settings)
+        initialSettings = settings.cloned()
     }
 
     override fun getDisplayName(): String {

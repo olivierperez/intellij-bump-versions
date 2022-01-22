@@ -1,4 +1,4 @@
-package fr.o80.version.model
+package fr.o80.version.domain.model
 
 data class VersionLine(
     val before: String,

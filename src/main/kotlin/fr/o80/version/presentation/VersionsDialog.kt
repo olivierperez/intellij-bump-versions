@@ -5,7 +5,7 @@ import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.ui.layout.panel
 import fr.o80.version.domain.ApplyVersions
 import fr.o80.version.domain.ReadVersion
-import fr.o80.version.model.VersionFile
+import fr.o80.version.domain.model.VersionFile
 import java.io.File
 import javax.swing.JComponent
 

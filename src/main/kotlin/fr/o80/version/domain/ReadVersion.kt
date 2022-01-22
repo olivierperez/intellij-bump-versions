@@ -1,7 +1,7 @@
 package fr.o80.version.domain
 
-import fr.o80.version.model.VersionFile
-import fr.o80.version.model.VersionLine
+import fr.o80.version.domain.model.VersionFile
+import fr.o80.version.domain.model.VersionLine
 import java.io.File
 
 class ReadVersion {

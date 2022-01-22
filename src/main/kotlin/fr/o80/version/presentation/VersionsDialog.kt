@@ -15,7 +15,7 @@ class VersionsDialog(
 ) : DialogWrapper(project) {
 
     private val applyVersions = ApplyVersions()
-    private val readVersion = ReadVersion()
+    private val readVersion = ReadVersion(project)
     private val listVersionFiles = ListVersionFiles(project)
 
     private val versions: List<VersionFile> =

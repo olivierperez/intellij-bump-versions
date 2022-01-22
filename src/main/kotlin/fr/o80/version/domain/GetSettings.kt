@@ -13,6 +13,7 @@ class GetSettings(
         val state = service.read()
         return VersionSettings(
             basePath = state.basePath,
+            versionCodeRegex = state.versionCodeRegex,
             versionFilePaths = state.versionFilePaths
         )
     }

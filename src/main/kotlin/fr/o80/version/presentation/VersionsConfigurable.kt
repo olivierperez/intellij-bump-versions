@@ -10,8 +10,6 @@ import com.intellij.ui.layout.panel
 import com.intellij.ui.table.TableView
 import fr.o80.version.domain.GetSettings
 import fr.o80.version.domain.SaveSettings
-import fr.o80.version.domain.model.VersionSettings
-import java.util.concurrent.CopyOnWriteArrayList
 import javax.swing.JComponent
 
 class VersionsConfigurable(
@@ -22,9 +20,10 @@ class VersionsConfigurable(
     private val saveSettings = SaveSettings(project)
 
     private var initialSettings = getSettings()
-    private val settings = VersionSettings(initialSettings.basePath, CopyOnWriteArrayList(initialSettings.versionFilePaths))
+    private val settings = initialSettings.cloned()
 
     private lateinit var basePathField: CellBuilder<JBTextField>
+    private lateinit var codeRegexField: CellBuilder<JBTextField>
     private val tableModel = VersionFilesTableModel(settings.versionFilePaths)
 
     override fun createComponent(): JComponent {
@@ -35,6 +34,14 @@ class VersionsConfigurable(
                     getter = { settings.basePath },
                     setter = { settings.basePath = it },
                 ).focused()
+            }
+
+            row {
+                label("Version code regex")
+                codeRegexField = textField(
+                    getter = { settings.versionCodeRegex },
+                    setter = { settings.versionCodeRegex = it },
+                )
             }
 
             row {
@@ -59,11 +66,14 @@ class VersionsConfigurable(
 
     override fun isModified(): Boolean {
         settings.basePath = basePathField.component.text
+        settings.versionCodeRegex = codeRegexField.component.text
+
         return initialSettings != settings
     }
 
     override fun apply() {
         settings.basePath = basePathField.component.text
+        settings.versionCodeRegex = codeRegexField.component.text
 
         saveSettings(settings)
         initialSettings = settings.cloned()

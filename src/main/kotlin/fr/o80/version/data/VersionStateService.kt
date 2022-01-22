@@ -15,6 +15,7 @@ class VersionStateServiceImpl : PersistentStateComponent<VersionSettingsData>, V
     override fun save(versionSettings: VersionSettings) {
         with(state) {
             basePath = versionSettings.basePath
+            versionCodeRegex = versionSettings.versionCodeRegex
             versionFilePaths.clear()
             versionFilePaths.addAll(versionSettings.versionFilePaths)
         }
@@ -24,6 +25,7 @@ class VersionStateServiceImpl : PersistentStateComponent<VersionSettingsData>, V
         return state.let { state ->
             VersionSettings(
                 basePath = state.basePath,
+                versionCodeRegex = state.versionCodeRegex,
                 versionFilePaths = state.versionFilePaths
             )
         }
